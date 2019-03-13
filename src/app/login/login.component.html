@@ -1,0 +1,11 @@
+<div *ngIf="user">
+    <h1>Hello {{ user.displayName }}!</h1>
+    <button (click)="logout()">Logout</button>
+</div>
+<p></p>
+<div *ngIf="!user">
+  You need to login to access our audio monitoring system
+  <br>
+  <button class="btn btn-primary my-2 my-sm-0 mr-2" (click)="login()">Login with a google account</button>
+</div>
+  

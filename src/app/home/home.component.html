@@ -1,0 +1,49 @@
+<!--The content below is only a placeholder and can be replaced.-->
+
+
+  <h2>Recent Activity</h2>
+  {{lastActivity && lastActivity.info}} -   {{lastActivityTime}}
+  
+  
+  <div class="row">
+    <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
+        <h2>Archivos procesados</h2>
+  
+  
+  <ngb-accordion #acc="ngbAccordion" activeIds="ngb-panel-0">
+      <ngb-panel *ngFor="let folder of items" [attr.title]="folder.folder">
+        <ng-template ngbPanelTitle>
+              {{folder.folder}}
+        </ng-template>
+        <ng-template ngbPanelContent>
+            <table class="table">
+                <thead>
+                  <tr>
+                      <th>Folder</th>
+                      <th>File</th>
+                      <th>Normal</th>
+                      <th>Válvula</th>
+                      <th>Descarga</th>
+                      <th>download</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr *ngFor="let item of folder.items ">
+                      <td>{{item.folder}}</td>
+                      <td>{{item.key}}</td>
+                      <td>{{item.summary['normal']}}</td>
+                      <td>{{item.summary['valvula']}}</td>
+                      <td>{{item.summary['descarga']}}</td>
+                      <td><a href="#" (click)="download(item);$event.preventDefault();"><i class="fa fa-download"></i></a></td>
+                  </tr>
+                </tbody>
+              </table>
+        </ng-template>
+      </ngb-panel>
+    </ngb-accordion>
+    </div>
+  </div>
+  
+
+  
+  
