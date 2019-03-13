@@ -1,24 +1,28 @@
 language: node_js
 node_js:
-- 8.11.3
+- '8.11.3'
+
+
 branches:
   only:
-  - master
+    - master
+
 before_script:
-- npm install -g @angular/cli@6.2.1
-- npm i
+  - npm install -g @angular/cli@6.2.1
+  - npm i
+
 script:
-- ng build --base-href /soundset/
+  - ng build --base-href /consentidos/
+
 deploy:
   provider: s3
   access_key_id: $AWS_ACCESS_KEY_ID
   secret_access_key: $AWS_SECRET_ACCESS_KEY
   bucket: visualiza.tideapps.com
-  local-dir: dist/soundsetMonitor
-  upload-dir: soundset
-  acl: public_read
-  on:
-    repo: elaval/soundsetMonitor
+  skip_cleanup: true
+  upload-dir: consentidos_
+  local_dir: dist/consentidos_
+
 notifications:
   email:
     on_failure: change
