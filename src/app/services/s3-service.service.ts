@@ -17,6 +17,6 @@ export class S3ServiceService {
   }
 
   getPresignedUrl(key) {
-    return this.http.get(`https://us-central1-soundset-abffd.cloudfunctions.net/helloWorld?key=${key}`);
+    return this.http.get(`https://us-central1-soundset-abffd.cloudfunctions.net/signer?key=${key}`);
   }
 }

@@ -50,7 +50,6 @@ export class HomeComponent implements OnInit {
     this.s3Service.getPresignedUrl(item.outputKey).subscribe(data => {
       const url = data && data['url'];
       window.open(url, '_blank');
-      alert(url)
     });
 
   }
