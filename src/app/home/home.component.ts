@@ -13,6 +13,7 @@ export class HomeComponent implements OnInit {
   items: any[];
   lastActivity: any;
   lastActivityTime: any;
+  selectedFolder: any;
 
   constructor(
     private db: AngularFirestore,
@@ -22,7 +23,7 @@ export class HomeComponent implements OnInit {
   ngOnInit() {
     this.db.collection('jobsDone').valueChanges().subscribe((data) => {
       data.forEach((d => {
-        const components = d['outputKey'].match(/^(.*)\/output\/([^\/]+)\/(.*)$/)
+        const components = d['outputKey'].match(/^data\/(.*)\/output\/([^\/]+)\/(.*)$/)
         const domain = components[1];
         const folder = components[2];
         const key = components[3];
@@ -38,6 +39,7 @@ export class HomeComponent implements OnInit {
       })
       
       this.items = nestedItems;
+      this.selectedFolder = this.items[0];
     });
 
     this.db.collection("logs").doc("LAST_ACTIVITY").get().subscribe((d) => {
