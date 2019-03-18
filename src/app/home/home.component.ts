@@ -3,6 +3,7 @@ import { AngularFirestore } from '@angular/fire/firestore';
 import * as _ from 'lodash';
 import * as moment from 'moment'
 import { S3ServiceService } from '../services/s3-service.service';
+import { AuthService } from '../services/auth.service';
 
 @Component({
   selector: 'app-home',
@@ -14,11 +15,28 @@ export class HomeComponent implements OnInit {
   lastActivity: any;
   lastActivityTime: any;
   selectedFolder: any;
+  classes = ["normal", "descarga"];
+  user: any;
+  validUser: any;
 
   constructor(
     private db: AngularFirestore,
-    private s3Service: S3ServiceService
-  ) { }
+    private s3Service: S3ServiceService,
+    private authService: AuthService
+  ) { 
+    this.authService.user.subscribe(user => {
+      this.user = user;
+
+      if (user && user.uid) {
+        this.db.collection("users").doc(user.uid).set({"email":user.email, "timestamp": new Date()}, {"merge": true})
+
+        this.db.collection("users").doc(user.uid).get().subscribe((d) => {
+          const userData = d.data();
+          this.validUser = userData && userData.valid
+        })
+      }
+    }) 
+  }
 
   ngOnInit() {
     this.db.collection('jobsDone').valueChanges().subscribe((data) => {

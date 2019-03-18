@@ -23,17 +23,13 @@ export class AppComponent {
 
     this.authService.user.subscribe(user => {
       if (user) {
-        this.userName = user.displayName;
+        this.userName = user.displayName || user.email;
         this.router.navigate(['/home']);
       } else {
         this.router.navigate(['/login']);
       }
       
     })    
-  }
-
-  login() {
-    this.authService.login();
   }
 
   logout() {

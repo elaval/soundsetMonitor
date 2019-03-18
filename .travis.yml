@@ -16,8 +16,8 @@ script:
 
 deploy:
   provider: s3
-  access-key-id: $AWS_ACCESS_KEY_ID
-  secret-access-key: $AWS_SECRET_ACCESS_KEY
+  access_key_id: $AWS_ACCESS_KEY_ID
+  secret_access_key: $AWS_SECRET_ACCESS_KEY
   bucket: visualiza.tideapps.com
   skip_cleanup: true
   upload-dir: soundset
